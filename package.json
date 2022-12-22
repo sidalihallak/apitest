@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -25,7 +25,6 @@
     "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
-    "@adminjs/typeorm": "^4.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^9.0.0",
