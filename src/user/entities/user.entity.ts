@@ -1,30 +1,34 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, UpdateDateColumn, CreateDateColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  UpdateDateColumn,
+  CreateDateColumn,
+  BaseEntity
+} from "typeorm";
 import { Resume } from "../../resume/entities/resume.entity";
-import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
-export class User {
-  @ApiProperty()
+export class User extends BaseEntity{
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ApiProperty()
   @Column()
   name: string;
 
-  @ApiProperty()
   @Column()
   email: string;
 
-  @ApiProperty()
+  @Column("simple-array")
+  roles: string[]
+
   @Column()
   password?: string;
 
-  @ApiProperty()
   @CreateDateColumn({name: 'created_at'})
   createdAt: Date;
 
-  @ApiProperty()
   @UpdateDateColumn({name: 'updated_at'})
   updatedAt: Date;
 

@@ -8,7 +8,7 @@ export class AuthService {
   constructor(private usersService: UserService, private jwtService: JwtService) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne({"email":email});
+    const user = await this.usersService.findByEmail({"email":email});
     if (user && await bcrypt.compare(pass, user.password)) {
       const { password, ...result } = user;
       return result;
@@ -16,6 +16,10 @@ export class AuthService {
     return null;
   }
 
+  async getUserByEmail(email: string): Promise<any> {
+    const user = await this.usersService.findByEmail({"email":email});
+    return user;
+  }
   async login(user: any) {
     const payload = {
       user : {

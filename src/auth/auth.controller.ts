@@ -2,7 +2,6 @@ import { Controller, Request, Post, UseGuards, Get, Body } from "@nestjs/common"
 import { LocalAuthGuard } from './guard/local-auth.guard';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
-import { CreateUserDto } from "../user/dto/create-user.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
 import { ApiTags } from "@nestjs/swagger";
@@ -25,7 +24,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return req.user.payload;
+  async getProfile(@Request() req) {
+    return this.authService.getUserByEmail(req?.user?.payload?.user?.email);
   }
 }

@@ -1,24 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { User } from "./entities/user.entity";
-import { Repository } from "typeorm";
 
 @Injectable()
-export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+export class UserService extends TypeOrmCrudService<User> {
+  constructor(@InjectRepository(User) repo) {
+    super(repo);
+  }
 
-  async findOne(data: number | any): Promise<User | undefined> {
-    return await this.usersRepository.findOneBy({
+  async findByEmail(data: number | any): Promise<User | undefined> {
+    return await this.repo.findOneBy({
       email: data.email
     });
   }
 
-  async create(data)  {
-    return await this.usersRepository.save(data).then(res => res).catch(e => console.log(e));
+  async create(data) {
+    return await this.repo.save(data).then(res => res).catch(e => console.log(e));
   }
 }
