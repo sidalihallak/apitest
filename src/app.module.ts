@@ -6,6 +6,7 @@ import { dataSourceOptions } from "../db/data-source";
 import { AuthModule } from './auth/auth.module';
 import { AuthInterceptor } from "./interceptor/auth.interceptor";
 import { APP_INTERCEPTOR } from "@nestjs/core";
+import { GenerateModule } from './generate/generate.module';
 
 
 @Module({
@@ -14,6 +15,7 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
     ResumeModule,
     UserModule,
     AuthModule,
+    GenerateModule,
   ],
   providers: [{
     provide: APP_INTERCEPTOR,

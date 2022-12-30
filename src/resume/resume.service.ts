@@ -8,5 +8,11 @@ export class ResumeService extends TypeOrmCrudService<Resume> {
   constructor(@InjectRepository(Resume) repo) {
     super(repo);
   }
+
+  async findById(id: number) {
+    return this.repo.findOneBy({
+      id: id
+    })
+  }
 }
 
